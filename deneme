@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<style type="text/css">
+	/* Evrensel seçici ile sayfanın değerlerini sıfırladım */
+	*{
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		color:white;
+	}
+	/* sayfaya 100% yükseklik vermek için body ve html değerlerine w100% h100% vermeniz gerekir */
+	body,html{width: 100%;height: 100%;}
+	/* ul ye 100% yükseklik verdim */
+	ul{background: #0889A6;width: 250px;height: 100%;}
+	/* transparan arka plan rengi ile altından geçecek olan div'in içeriği bozmamasını sağladım */
+	ul li{z-index:2;cursor:pointer;position: relative;float: left;clear: both; width: 250px;height: 51px;background:transparent;text-align: center;line-height: 51px;border-bottom: 1px solid #fff;}
+/* z-index:-1 ile en alta yerleştirdim siz bunu li nin üstünden 
+geçtiğini sanıyordunuz ama transparan olan arka plan rengi sayesinde altından geçiyordu ve içerikte okunabiliyordu. margin-left değeri -250px
+yani sayfanın dışından başlıyor aslında t */
+.acilan-div{
+	z-index: -1;
+	position: absolute;
+	width: 250px;
+	margin-left: -250px;
+	height: 50px;
+	opacity: 0;
+	background: #06BEE1;
+	transition:all .3s ease-in-out;
+}
+/* li hover olunca yazı tipini beyaz yap*/
+ul li:hover{color:white;}
+/* li hover olunca acilan-div divin margin-left değerini yukarda verdiğim transition ile  0 la*/
+ul li:hover .acilan-div
+{
+	opacity: 1;
+	margin-left: 0px;
+}
+/* sayfanın ortasına yerleştirilmiş bir div */
+#icerik{
+	width: 500px;
+	height: 500px;
+	background: #27313e;
+	position: fixed;
+	font-size: 26px;
+	line-height: 500px;
+	text-align: center;
+	left: 50%;
+	top:50%;
+	margin-left: -130px;
+	cursor: pointer;
+	margin-top: -250px;
+	transition:all 1s ease-in-out;
+}
+/* üstüne gelince 30 derece döndür ve boyutunu 140% olarak büyült */
+#icerik:hover
+{
+	transform:scale(1.4)rotate(30deg);
+}
+/* üye girişinin üstüne gelince yüksekliğini büyült */
+#u-gi:hover{height: 100px;transition:all .3s ease-in-out;}
+/* üye girişinin üstüne gelince inputlar gözüksün */
+#u-gi:hover #uye-giris{display: block;}
+/* Normal stil kodları*/
+li input{
+	margin-top: 6px;
+	margin-left: 5px;
+	width: 140px;
+	color:black;
+	height: 30px;
+}
+/* normal stil kodları */
+button{color:black;width: 50px;
+	height: 30px;
+}
+/* tranisiton ile animasyonlu geçiş */
+#uye-giris{
+	display: none;
+	transition:all .3s ease-in-out;
+	color:black;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title></title>
+<link rel="stylesheet" href="qunit.css" type="text/css" media="screen">
+<script src="http://code.jquery.com/jquery-latest.js"></script>	
+<!-- JS -->
+
+<!-- End Js -->
+</head>
+<body>
+	<ul id="liste">
+		<li onclick="goster(this)"><div class="acilan-div"></div><!-- /acilan-div --> 
+			Anasayfa
+		</li>
+			<li onclick="goster(this)"><div class="acilan-div"></div><!-- /acilan-div -->
+				Ürünler
+			</li>
+				<li onclick="goster(this)"><div class="acilan-div"></div><!-- /acilan-div -->
+					Hakkımızda
+				</li>
+					<li onclick="goster(this)"><div class="acilan-div"></div><!-- /acilan-div -->
+						İletişim
+					</li>
+						<li onclick="goster(this)"><div class="acilan-div"></div><!-- /acilan-div -->
+							Portfolyo</li>
+							<li id="u-gi"><div class="acilan-div"></div><!-- /acilan-div --> 
+								Üye Girişi 
+								<div id="uye-giris">  
+									<input placeholder="Ad Soyad"  type="text" id="kAdi"> 
+									<button id="button" onclick="ac(document.getElementById('kAdi').value)" value="Giriş">
+										Giriş</button>
+								</div>
+							</li>
+								<li onclick="goster(this)"><div class="acilan-div"></div><!-- /acilan-div --> 
+									Kayıt Ol
+								</li>
+									<li onclick="goster(this)"><div class="acilan-div"></div><!-- /acilan-div --> 
+										Yardım</li>
+									</ul>
+									<div onclick="kaybet()" id="icerik">
+
+									</div><!-- /icerik -->
+									<script type="text/javascript">
+									/* onclick="goster(this)" ile 
+									fonksiyona elemanı gönderiyoruz
+									*/
+									function goster(x){
+										
+										document.getElementById("icerik").innerHTML=x.innerHTML+" ' a tıkladın";
+									}
+									function ac(y){
+										/*  gelen değer x,y,z herhangibir 
+										değer olarak alınıyor ve hoşgeldiniz y başarıyla giriş yaptınız diye uyarı penceresi veriliyor  */
+										alert("Hoşgeldiniz "+y+" Başarıyla Giriş Yaptınız." );
+									}
+									function kaybet(){
+										/* içerik divine tıklandıgında css metodunu kullanarak %0 oranında küçültülüp 3600 derece döndürülüyor css ile verilen transition efekti ile animasyonlu kaybediliş sağlanmış oluyor */
+										document.getElementById("icerik").style.transform="scale(.0)rotate(3600deg)";
+									}
+									</script>
+								</body>
+								</html>
